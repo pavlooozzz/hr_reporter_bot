@@ -1,11 +1,8 @@
 package hr.reporter.bot.domain.command.handler
 
-import java.lang.RuntimeException
-import kotlin.jvm.Throws
+import hr.reporter.bot.domain.command.ReportHRInappropriateBehavior
 
 interface ReportHRInappropriateBehaviorHandler {
-    @Throws(CommandHandleError::class)
-    fun hande(reportHRInappropriateBehaviorHandler: ReportHRInappropriateBehaviorHandler)
-}
 
-class CommandHandleError(override val message: String?) : RuntimeException()
+    fun hande(reportHRInappropriateBehavior: ReportHRInappropriateBehavior)
+}

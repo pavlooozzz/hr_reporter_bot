@@ -4,7 +4,7 @@ import java.time.Instant
 
 data class HRInappropriateBehaviorReport(
     val hrIdentifier: HRIdentifier,
-    val reportIdentifier: ReportIdentifier,
+    val reporterIdentifier: ReporterIdentifier,
     val behavior: InappropriateBehavior,
     val createdAt: Instant
 )
