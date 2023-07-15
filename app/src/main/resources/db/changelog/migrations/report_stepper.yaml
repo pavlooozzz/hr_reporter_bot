@@ -1,0 +1,16 @@
+databaseChangeLog:
+    -   changeSet:
+            id: create table hr_report_user_steps
+            author: pavel@svhartsberg
+            preConditions:
+                -   onFail: HALT
+                -   sqlCheck:
+                        expectedResult: 0
+                        sql: select count(1) from information_schema.tables where table_name = 'hr_report_stepper' and table_schema = current_schema()
+            changes:
+                -   sql:
+                        CREATE TABLE hr_report_user_steps (
+                        id        bigserial PRIMARY KEY,
+                        event_type varchar(255) NOT NULL,
+                        created_at timestamp NOT NULL
+                        );

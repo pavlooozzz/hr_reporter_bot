@@ -1,0 +1,11 @@
+spring:
+    datasource:
+        driverClassName: org.postgresql.Driver
+        url: jdbc:postgresql://postgres:5432/test_db
+        username: postgres
+        password: 4y7sV96vA9wv46VR
+    liquibase:
+        change-log: classpath:db/changelog/db.changelog-master.yaml
+
+bot:
+    token:
