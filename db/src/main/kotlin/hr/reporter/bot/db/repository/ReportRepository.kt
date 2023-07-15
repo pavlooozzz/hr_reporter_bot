@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ReportRepository : CrudRepository<ReportEntity, Long> {
     fun findByHrContactTypeAndHrIdentifier(hrContactType: ContactType, hrIdentifier: String): List<ReportEntity>
-    fun findByReporterContactTypeAndReporterIdentifier(
-        reporterContactType: ContactType,
+    fun findByReporterIdentifier(
         reporterIdentifier: String
     ): List<ReportEntity>
 }

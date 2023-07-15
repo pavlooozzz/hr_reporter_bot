@@ -11,7 +11,7 @@ class Event(
     val userIdentifier: ReporterIdentifier,
     val eventTime: Instant,
     val eventType: EventType,
-    val reportData: Any? = null
+    val eventData: Any? = null
 )
 
 enum class EventType {
@@ -22,7 +22,6 @@ enum class EventType {
     BEHAVIOR_DESCRIPTION_RECEIVED,
     REPORT_SUBMITTED
 }
-
 
 data class HRContactTypeSelectedEventData(
     val contactType: ContactType

@@ -1,22 +1,19 @@
 package hr.reporter.bot.telegram
 
-import hr.reporter.bot.domain.command.handler.ReportHRInappropriateBehaviorHandler
+import hr.reporter.bot.domain.command.handler.SubmitReportComand
 import org.slf4j.LoggerFactory
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
-import org.telegram.telegrambots.meta.api.methods.ActionType
-import org.telegram.telegrambots.meta.api.methods.send.SendChatAction
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton.InlineKeyboardButtonBuilder
 
 
 private val logger = LoggerFactory.getLogger(Bot::class.java)
 
 class Bot(
     botToken: String,
-    private val handler: ReportHRInappropriateBehaviorHandler
+    private val handler: SubmitReportComand
 ) :
     TelegramLongPollingBot(botToken) {
 
@@ -49,10 +46,11 @@ class Bot(
             sendMessage.text = "What you want to do ?"
             sendMessage.replyMarkup = InlineKeyboardMarkup().also { inlineKeyboardMarkup ->
                 inlineKeyboardMarkup.keyboard = listOf(
-                    listOf(InlineKeyboardButton().also {
-                        it.text = "Report HR behavior by telegram!"
-                        it.callbackData = "/report_hr_telegram"
-                    },
+                    listOf(
+                        InlineKeyboardButton().also {
+                            it.text = "Report HR behavior by telegram!"
+                            it.callbackData = "/report_hr_telegram"
+                        },
                         InlineKeyboardButton().also {
                             it.text = "Report HR behavior by phone!"
                             it.callbackData = "/report_hr_phone"

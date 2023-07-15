@@ -8,7 +8,7 @@ import hr.reporter.bot.domain.model.event.HRIdentifierReceivedEventData
 import hr.reporter.bot.domain.model.event.InappropriateBehaviorSelectedEventData
 import java.time.Instant
 
-data class HRInappropriateBehaviorReportStepper(
+data class ReportStepper(
     val hrContactType: ContactType? = null,
     val hrIdentifier: String? = null,
     val reporterIdentifier: ReporterIdentifier? = null,
@@ -19,43 +19,45 @@ data class HRInappropriateBehaviorReportStepper(
     val events: List<Event> = emptyList()
 ) {
 
-    fun apply(event: Event): HRInappropriateBehaviorReportStepper {
+    fun apply(event: Event): ReportStepper {
         return when (event.eventType) {
-             EventType.REPORT_STARTED -> {
+            EventType.REPORT_STARTED -> {
                 this.copy(
                     reporterIdentifier = event.userIdentifier,
                     createdAt = event.eventTime,
                     events = this.events + event
                 )
             }
+
             EventType.HR_CONTACT_TYPE_SELECTED -> {
                 this.copy(
-                    hrContactType = (event.reportData as HRContactTypeSelectedEventData).contactType
+                    hrContactType = (event.eventData as HRContactTypeSelectedEventData).contactType
                 )
             }
+
             EventType.HR_IDENTIFIER_RECEIVED -> {
                 this.copy(
-                    hrIdentifier = (event.reportData as HRIdentifierReceivedEventData).hrIdentifier
+                    hrIdentifier = (event.eventData as HRIdentifierReceivedEventData).hrIdentifier
                 )
             }
+
             EventType.INAPPROPRIATE_BEHAVIOR_SELECTED -> {
                 this.copy(
-                    behavior = (event.reportData as InappropriateBehaviorSelectedEventData).inappropriateBehavior
+                    behavior = (event.eventData as InappropriateBehaviorSelectedEventData).inappropriateBehavior
                 )
             }
+
             EventType.BEHAVIOR_DESCRIPTION_RECEIVED -> {
                 this.copy(
-                    description = (event.reportData as BehaviorDescriptionReceivedEventData).description
+                    description = (event.eventData as BehaviorDescriptionReceivedEventData).description
                 )
             }
+
             EventType.REPORT_SUBMITTED -> {
                 this.copy(
                     isSubmitted = true
                 )
             }
         }
-
     }
 }
-
-class UnknownEventTypeException(override val message: String?): RuntimeException(message)

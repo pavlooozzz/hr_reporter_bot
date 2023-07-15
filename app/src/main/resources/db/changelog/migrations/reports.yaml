@@ -15,5 +15,6 @@ databaseChangeLog:
                         hr_identifier varchar(255) NOT NULL,
                         inappropriate_behavior varchar(255) NOT NULL,
                         reporter_identifier varchar(255) NOT NULL,
+                        description varchar(255) NOT NULL,
                         created_at timestamp NOT NULL default now()
                         );
