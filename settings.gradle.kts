@@ -1,2 +1,2 @@
 rootProject.name = "hr_reporter_bot"
-include("app", "domain", "db")
+include("app", "domain", "db", "telegram-adapter")

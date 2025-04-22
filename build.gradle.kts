@@ -23,6 +23,7 @@ subprojects {
 
     dependencies {
         implementation(platform("${BOMs.spring_boot}:${Global.spring_boot_version}"))
+        implementation(Libs.telegram_bot)
     }
 
     detekt {
